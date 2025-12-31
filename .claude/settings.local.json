@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git fetch:*)",
+      "Bash(powershell.exe:*)",
+      "Bash(mkdir:*)",
+      "Bash(git rev-parse:*)",
+      "Bash(python -m unittest:*)",
+      "Bash(.specify/scripts/powershell/check-prerequisites.ps1 -Json -RequireTasks -IncludeTasks)",
+      "Bash(python -m pytest:*)",
+      "Bash(cat:*)",
+      "Bash(python:*)",
+      "Bash(uv run python:*)",
+      "Bash(.venv\\\\Scripts\\\\python.exe:*)"
+    ]
+  }
+}

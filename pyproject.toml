@@ -1,0 +1,15 @@
+[project]
+name = "todo-cli"
+version = "0.1.0"
+description = "In-memory Todo Application CLI - Hackathon II Phase I"
+requires-python = ">=3.13"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.uv]
+dev-dependencies = []
+
+[tool.hatch.build.targets.wheel]
+packages = ["src"]
