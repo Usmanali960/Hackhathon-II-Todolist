@@ -11,7 +11,15 @@
       "Bash(cat:*)",
       "Bash(python:*)",
       "Bash(uv run python:*)",
-      "Bash(.venv\\\\Scripts\\\\python.exe:*)"
+      "Bash(.venv\\\\Scripts\\\\python.exe:*)",
+      "Bash(timeout 10s python -m src.cli.main)",
+      "Bash(dir testsunit)",
+      "Bash(dir \"tests\\\\unit\")",
+      "Bash(del test_get_task.py)",
+      "Bash(dir)",
+      "Bash(dir src)",
+      "Bash(dir srccli)",
+      "Bash(dir:*)"
     ]
   }
 }

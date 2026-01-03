@@ -139,13 +139,12 @@ class MenuInterface:
             print(self._formatter.format_error("Invalid task ID. Please enter a number."))
             return
 
-        # Show task before confirming
-        from ..services.task_store import TaskStore
-        task = TaskStore().get(task_id)
+        # Show task before confirming - use the operations to get the specific task
+        task_to_delete = self._operations.get_task(task_id)
 
-        if task:
+        if task_to_delete:
             print("Task to delete:")
-            print(self._formatter.format_task(task, show_details=True))
+            print(self._formatter.format_task(task_to_delete, show_details=True))
 
             confirm = input("Delete this task? (y/n): ").strip().lower()
 
@@ -192,7 +191,8 @@ class MenuInterface:
 
         tasks = self._handler.handle_search(keyword)
 
-        print(f"\n{self._formatter.format_filter_result(tasks, f'keyword \"{keyword}\"')}")
+        criteria = f'keyword "{keyword}"'
+        print(f"\n{self._formatter.format_filter_result(tasks, criteria)}")
 
         if tasks:
             for task in tasks:
@@ -242,7 +242,8 @@ class MenuInterface:
 
         tasks = self._handler.handle_filter(status=status)
 
-        print(f"\n{self._formatter.format_filter_result(tasks, f'status \"{status}\"')}")
+        criteria = f'status "{status}"'
+        print(f"\n{self._formatter.format_filter_result(tasks, criteria)}")
 
         if tasks:
             for task in tasks:
@@ -274,7 +275,8 @@ class MenuInterface:
 
         tasks = self._handler.handle_filter(priority=priority)
 
-        print(f"\n{self._formatter.format_filter_result(tasks, f'priority \"{priority}\"')}")
+        criteria = f'priority "{priority}"'
+        print(f"\n{self._formatter.format_filter_result(tasks, criteria)}")
 
         if tasks:
             for task in tasks:

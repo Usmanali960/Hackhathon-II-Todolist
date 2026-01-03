@@ -34,11 +34,11 @@ class CLIFormatter:
         """
         # Status indicator
         if task.is_overdue():
-            status_indicator = "⚠"
+            status_indicator = "!"
         elif task.status == Status.COMPLETE:
-            status_indicator = "✓"
+            status_indicator = "X"
         else:
-            status_indicator = "✗"
+            status_indicator = "O"
 
         # Priority abbreviation
         priority_abbrev = {
@@ -112,11 +112,11 @@ class CLIFormatter:
         for task in tasks:
             # Status indicator
             if task.is_overdue():
-                status_indicator = "⚠"
+                status_indicator = "!"
             elif task.status == Status.COMPLETE:
-                status_indicator = "✓"
+                status_indicator = "X"
             else:
-                status_indicator = "✗"
+                status_indicator = "O"
 
             # Truncate title if too long (max 27 chars)
             title = task.title[:27]
@@ -158,9 +158,9 @@ class CLIFormatter:
             Formatted reminder string for CLI notification
 
         Example:
-            🔔 REMINDER: Task #1 "Buy groceries" is due now!
+            [REMINDER] Task #1 "Buy groceries" is due now!
         """
-        return f"🔔 REMINDER: Task #{task.id} \"{task.title}\" is due now!"
+        return f"[REMINDER] Task #{task.id} \"{task.title}\" is due now!"
 
     def format_success(self, message: str) -> str:
         """
@@ -173,9 +173,9 @@ class CLIFormatter:
             Formatted success string
 
         Example:
-            ✓ Task created successfully.
+            [SUCCESS] Task created successfully.
         """
-        return f"✓ {message}"
+        return f"[SUCCESS] {message}"
 
     def format_empty_list(self) -> str:
         """

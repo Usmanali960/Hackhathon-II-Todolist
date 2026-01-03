@@ -109,6 +109,18 @@ class TaskOperations:
 
         return self._store.update(id, **fields)
 
+    def get_task(self, id: int) -> Optional[Task]:
+        """
+        Retrieve task by ID.
+
+        Args:
+            id: Task ID to retrieve
+
+        Returns:
+            Task if found, None otherwise
+        """
+        return self._store.get(id)
+
     def get_all_tasks(self) -> List[Task]:
         """
         Retrieve all tasks.
@@ -167,6 +179,7 @@ class TaskOperations:
             for task in all_tasks
             if keyword_lower in task.title.lower()
             or (task.description and keyword_lower in task.description.lower())
+            or any(keyword_lower in tag.lower() for tag in task.tags)
         ]
 
     def filter_by_status(self, status: Status) -> List[Task]:
@@ -242,7 +255,7 @@ class TaskOperations:
         """
         tasks = self._store.list_all()
 
-        priority_order = {Priority.HIGH: 0, Priority.MEDIUM: 1, Priority.LOW: 2}
+        priority_order = {Priority.HIGH: 2, Priority.MEDIUM: 1, Priority.LOW: 0}
 
         tasks.sort(key=lambda t: priority_order[t.priority], reverse=not ascending)
 

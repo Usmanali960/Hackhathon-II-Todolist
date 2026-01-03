@@ -57,11 +57,15 @@ def parse_time(time_str: str) -> Tuple[int, int]:
     """
     time_str = time_str.strip()
 
-    # Try HH:MM format
-    try:
-        time_obj = datetime.strptime(time_str, "%H:%M")
-        return time_obj.hour, time_obj.minute
-    except ValueError:
+    # Check if format matches HH:MM (5 characters) for 24-hour format
+    if len(time_str) == 5 and time_str[2] == ':':
+        try:
+            time_obj = datetime.strptime(time_str, "%H:%M")
+            return time_obj.hour, time_obj.minute
+        except ValueError:
+            pass
+    else:
+        # Not in HH:MM format, so it doesn't match the first supported format
         pass
 
     # Try HH:MM AM/PM format
